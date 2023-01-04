@@ -80,7 +80,9 @@
     root@mon-VM:/proc# cat cpuinfo | grep sse
     flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni ssse3 cx16 pcid sse4_1 sse4_2 x2apic hypervisor lahf_lm invpcid_single fsgsbase invpcid md_clear flush_l1d arch_capabilities
     flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni ssse3 cx16 pcid sse4_1 sse4_2 x2apic hypervisor lahf_lm invpcid_single fsgsbase invpcid md_clear flush_l1d arch_capabilities
-# 12)
+# 12) При открытии нового окна терминала и vagrant ssh создается новая сессия и выделяется pty. Это можно подтвердить командой tty, которая упоминалась в лекции 3.2. Однако: vagrant@netology1:~$ ssh localhost 'tty' not a tty. Почитайте, почему так происходит, и как изменить поведение.
+    При выполнении команды ssh без аттрибутов на удаленном сервере не выделяется TTY
+    Опция -t принудительно выделит псевдотерминал: ssh -t localhost 'tty'
 # 13) Бывает, что есть необходимость переместить запущенный процесс из одной сессии в другую. Попробуйте сделать это, воспользовавшись reptyr. Например, так можно перенести в screen процесс, который вы запустили по ошибке в обычной SSH-сессии.
 ### перенес идущий пинг из одной сессии в другую:
     sudo reptyr -s 6207
@@ -89,4 +91,4 @@
     64 bytes from localhost (127.0.0.1): icmp_seq=329 ttl=64 time=0.033 ms
     64 bytes from localhost (127.0.0.1): icmp_seq=330 ttl=64 time=0.021 ms
 # 14) sudo echo string > /root/new_file не даст выполнить перенаправление под обычным пользователем, так как перенаправлением занимается процесс shell'а, который запущен без sudo под вашим пользователем. Для решения данной проблемы можно использовать конструкцию echo string | sudo tee /root/new_file. Узнайте? что делает команда tee и почему в отличие от sudo echo команда с sudo tee будет работать.
-### tee читает с stdin и записывает в stdout и файлы. В первом примере sudo относится к команде echo, но не к записи в файл, поэтому permission denied. Во втором примере sudo перед tee, соответственно запись идёт с правами суперпользователя.
+### tee читает с stdin и записывает в stdout и файлы. В первом примере sudo относится к команде echo, но не к перенаправлению и записи в файл, поэтому permission denied. Во втором примере sudo перед tee, соответственно запись идёт с правами суперпользователя.
