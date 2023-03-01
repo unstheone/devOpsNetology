@@ -55,11 +55,11 @@ done
 array_ip=("192.168.0.1:80" "173.194.222.113:80" "87.250.250.242:80" )
 for i in ${array_ip[@]}
 do
-  for j in [1..5]
-  do
-        echo "Тестируем $i $j раз"
-        curl $i >> ~/log
-  done
+        for j in {1..5}
+        do
+                echo "Тестируем $i $j раз"
+                curl -m 10 $i > ~/log
+        done
 done
 ```
 
@@ -71,27 +71,24 @@ done
 ### Ваш скрипт:
 ```bash
 !#/bin/bash
-
-while ((1==1))
+array_ip=("173.194.222.113:80" "87.250.250.242:80" "192.168.0.1:80")
+check_status=0
+while (($check_status == 0))
 do
-        curl 192.168.0.1:80 >> ~/log
-        if (($? != 0))
-        then
-                echo "192.168.0.1" >> ~/error
-                break
-        fi
-        curl 173.194.222.113:80 >> ~/log
-        if (($? != 0))
-        then
-                echo "173.194.222.113" >> ~/error
-                break
-        fi
-        curl 87.250.250.242:80 >> ~/log
-        if (($? != 0))
-        then
-                echo "87.250.250.242" >> ~/error
-                break
-        fi
+        for i in ${array_ip[@]}
+        do
+                echo "Тестируем $i"
+                curl -m 10 $i
+                check_status=$?
+                if (($check_status != 0))
+                then
+                        echo "$i оказался недоступен" >> error
+                        break
+                else
+                        echo "$i доступен, проверка продолжается" > log
+
+                fi
+        done
 done
 ```
 
