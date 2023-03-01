@@ -39,7 +39,7 @@ do
 	curl https://localhost:4757
 	if (($? != 0))
 	then
-	    date >> curl.log
+	    date > curl.log
 	else
 	    break
 	fi
@@ -52,13 +52,14 @@ done
 ### Ваш скрипт:
 ```bash
 !#/bin/bash
-
-for ((i=1; i <=5; i++))
+array_ip=("192.168.0.1:80" "173.194.222.113:80" "87.250.250.242:80" )
+for i in ${array_ip[@]}
 do
-        echo $i # проверка проходов, можно не делать
-        curl 192.168.0.1:80 >> ~/log
-        curl 173.194.222.113:80 >> ~/log
-        curl 87.250.250.242:80 >> ~/log
+  for j in [1..5]
+  do
+        echo "Тестируем $i $j раз"
+        curl $i >> ~/log
+  done
 done
 ```
 
