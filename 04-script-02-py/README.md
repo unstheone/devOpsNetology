@@ -68,12 +68,27 @@ vagrant@vagrant:~$ python3 2.py
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+
+import os, sys
+
+directory = sys.argv[1]
+bash_command = [f"cd {directory})", "git ls-files -m --full-name"]
+result_os = os.popen(' && '.join(bash_command)).read()
+
+for result in result_os.split('\n'):
+    if result != '':
+        print(os.path.abspath(result))
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+vagrant@vagrant:~$ python3 3.py /home
+fatal: not a git repository (or any of the parent directories): .git
+vagrant@vagrant:~$ python3 3.py /home/vagrant/
+/home/vagrant/1.py
+/home/vagrant/log
+vagrant@vagrant:~$
 ```
 
 ------
@@ -93,7 +108,12 @@ vagrant@vagrant:~$ python3 2.py
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+import os, socket
+
+services_name = ['drive.google.com', 'mail.google.com', 'google.com']
+for (i in services_name)
+    services_ip[i] = socket.gethostbyname(services_name[i])
 ```
 
 ### Вывод скрипта при запуске при тестировании:
