@@ -109,65 +109,58 @@ vagrant@vagrant:~$
 ### Ваш скрипт:
 ```python
 #!/usr/bin/env python3
-import os, socket
+import time, socket
 
-services_name = ['drive.google.com', 'mail.google.com', 'google.com']
-for (i in services_name)
-    services_ip[i] = socket.gethostbyname(services_name[i])
+hosts = ['drive.google.com', 'google.com', 'mail.google.com']
+IPs = {}
+while (True):
+    for host in hosts:
+        ip = socket.gethostbyname(host)
+        try:
+            if (IPs[host] == ip):
+                print ("[OK] - no change "+ host + " " + ip )
+            else:
+                print("[ERROR] " + host +" IP missmatch: " + IPs[host] + " " + ip)
+            IPs[host] = ip
+        except:
+            IPs[host] = ip
+            print ("[FIRST TEST] " + host + " " + ip)
+    time.sleep(5)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+vagrant@vagrant:~$ python3 4.py
+[FIRST TEST] drive.google.com 64.233.165.194
+[FIRST TEST] google.com 209.85.233.139
+[FIRST TEST] mail.google.com 64.233.162.18
+[OK] - no change drive.google.com 64.233.165.194
+[ERROR] google.com IP missmatch: 209.85.233.139 209.85.233.100
+[ERROR] mail.google.com IP missmatch: 64.233.162.18 64.233.162.83
+[OK] - no change drive.google.com 64.233.165.194
+[OK] - no change google.com 209.85.233.100
+[OK] - no change mail.google.com 64.233.162.83
+[OK] - no change drive.google.com 64.233.165.194
+[OK] - no change google.com 209.85.233.100
+[OK] - no change mail.google.com 64.233.162.83
+[OK] - no change drive.google.com 64.233.165.194
+[OK] - no change google.com 209.85.233.100
+[OK] - no change mail.google.com 64.233.162.83
+[OK] - no change drive.google.com 64.233.165.194
+[OK] - no change google.com 209.85.233.100
+[OK] - no change mail.google.com 64.233.162.83
+[OK] - no change drive.google.com 64.233.165.194
+[OK] - no change google.com 209.85.233.100
+[OK] - no change mail.google.com 64.233.162.83
+[ERROR] drive.google.com IP missmatch: 64.233.165.194 64.233.162.194
+[OK] - no change google.com 209.85.233.100
+[OK] - no change mail.google.com 64.233.162.83
+^CTraceback (most recent call last):
+  File "4.py", line 17, in <module>
+    time.sleep(5)
+KeyboardInterrupt
+
+vagrant@vagrant:~$
 ```
 
 ------
-
-## Дополнительное задание (со звездочкой*) - необязательно к выполнению
-
-Так получилось, что мы очень часто вносим правки в конфигурацию своей системы прямо на сервере. Но так как вся наша команда разработки держит файлы конфигурации в github и пользуется gitflow, то нам приходится каждый раз: 
-* переносить архив с нашими изменениями с сервера на наш локальный компьютер, 
-* формировать новую ветку, 
-* коммитить в неё изменения, 
-* создавать pull request (PR) 
-* и только после выполнения Merge мы наконец можем официально подтвердить, что новая конфигурация применена. 
-
-Мы хотим максимально автоматизировать всю цепочку действий. 
-* Для этого нам нужно написать скрипт, который будет в директории с локальным репозиторием обращаться по API к github, создавать PR для вливания текущей выбранной ветки в master с сообщением, которое мы вписываем в первый параметр при обращении к py-файлу (сообщение не может быть пустым).
-* При желании, можно добавить к указанному функционалу создание новой ветки, commit и push в неё изменений конфигурации. 
-* С директорией локального репозитория можно делать всё, что угодно. 
-* Также, принимаем во внимание, что Merge Conflict у нас отсутствуют и их точно не будет при push, как в свою ветку, так и при слиянии в master. 
-
-Важно получить конечный результат с созданным PR, в котором применяются наши изменения. 
-
-### Ваш скрипт:
-```python
-???
-```
-
-### Вывод скрипта при запуске при тестировании:
-```
-???
-```
-
-----
-
-### Правила приема домашнего задания
-
-В личном кабинете отправлена ссылка на .md файл в вашем репозитории.
-
------
-
-### Критерии оценки
-
-<<<<<<< HEAD
-Зачет - выполнены все задания, ответы даны в развернутой форме, приложены соответствующие скриншоты и файлы проекта, в выполненных заданиях нет противоречий и нарушения логики.
-=======
-### Как сдавать задания
->>>>>>> af77aa3d790af0bbd9dfc01cb44d84ab7fb54dc5
-
-На доработку - задание выполнено частично или не выполнено, в логике выполнения заданий есть противоречия, существенные недостатки. 
- 
-Обязательными к выполнению являются задачи без указания звездочки. Их выполнение необходимо для получения зачета и диплома о профессиональной переподготовке.
-Задачи со звездочкой (*) являются дополнительными задачами и/или задачами повышенной сложности. Они не являются обязательными к выполнению, но помогут вам глубже понять тему.
-
