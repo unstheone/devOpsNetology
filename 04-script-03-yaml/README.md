@@ -101,14 +101,14 @@ vagrant@vagrant:~$ python3 7.py
 ```
 
 ### json-файл(ы), который(е) записал ваш скрипт:
+`vagrant@vagrant:~$ cat data.json`
 ```json
-vagrant@vagrant:~$ cat data.json
 {"drive.google.com": "142.250.74.78", "mail.google.com": "216.58.207.197", "google.com": "142.250.74.174"}
 ```
 
 ### yml-файл(ы), который(е) записал ваш скрипт:
+`vagrant@vagrant:~$ cat data.yml`
 ```yaml
-vagrant@vagrant:~$ cat data.yml
 drive.google.com: 142.250.74.78
 google.com: 142.250.74.174
 mail.google.com: 216.58.207.197
