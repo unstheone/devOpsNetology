@@ -1,0 +1,31 @@
+{
+  "builders": [
+    {
+      "type":      "yandex",
+      "token":     "\\PUT_HERE_YOUR_TOKEN\\",
+      "folder_id": "b1ghng7din6l7sfd4ftj",
+      "zone":      "ru-central1-d",
+
+      "image_name":        "centos-7-base",
+      "image_family":      "centos",
+      "image_description": "centos-7",
+
+      "source_image_family": "centos-7",
+      "use_ipv4_nat":        true,
+      "disk_type":           "network-nvme",
+      "ssh_username":        "centos"
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "sudo yum -y update",
+        "sudo yum -y install bridge-utils bind-utils iptables curl net-tools tcpdump rsync telnet openssh-server epel-release",
+        "sudo curl -L https://github.com/docker/compose/releases/download/v2.5.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose",
+        "sudo chmod +x /usr/local/bin/docker-compose"
+        "sudo yum install -y ansible"
+      ],
+      "type": "shell"
+    }
+  ]
+}
