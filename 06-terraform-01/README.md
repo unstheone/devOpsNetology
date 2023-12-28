@@ -1,6 +1,6 @@
 ### Задание 1
 
-1. Перейдите в каталог [**src**](https://github.com/netology-code/ter-homeworks/tree/main/01/src). Скачайте все необходимые зависимости, использованные в проекте. 
+1. Перейдите в каталог **src**. Скачайте все необходимые зависимости, использованные в проекте. 
 ```commandline
 done
 ```
@@ -22,7 +22,7 @@ resource "docker_image" {
 name  = "example_${random_password.random_string_FAKE.resulT}"
 # строка 31 *опечатки*
 ```
-5. Выполните код. В качестве ответа приложите: исправленный фрагмент кода и вывод команды ```docker ps```.
+6. Выполните код. В качестве ответа приложите: исправленный фрагмент кода и вывод команды ```docker ps```.
 ```terraform
 resource "docker_image" "my_nginx"{
   name         = "nginx:latest"
@@ -44,7 +44,7 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED              STAT
 4ea503ddbd2f   d453dd892d93   "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8000->80/tcp   example_c8Xsdchm1vhpBMgC
 
 ```
-6. Замените имя docker-контейнера в блоке кода на ```hello_world```. Не перепутайте имя контейнера и имя образа. Мы всё ещё продолжаем использовать name = "nginx:latest". Выполните команду ```terraform apply -auto-approve```.
+7. Замените имя docker-контейнера в блоке кода на ```hello_world```. Не перепутайте имя контейнера и имя образа. Мы всё ещё продолжаем использовать name = "nginx:latest". Выполните команду ```terraform apply -auto-approve```.
 Объясните своими словами, в чём может быть опасность применения ключа  ```-auto-approve```. Догадайтесь или нагуглите зачем может пригодиться данный ключ? В качестве ответа дополнительно приложите вывод команды ```docker ps```.
 ```commandline
 sudo docker ps
@@ -54,6 +54,7 @@ d7a2ab64a6f3   d453dd892d93   "/docker-entrypoint.…"   3 seconds ago   Up 2 se
 ```
 _Опасность применения такого ключа - не требуется ответа **yes**, а значит, если мы не сделали plan перед этим, то мы и повлиять не сможем.
 Преимущество схоже с недостатком - не надо отвечать yes, что может при автоматизациях или разворачивании на узлах, где мы не можем ответить yes в консоль._
+
 8. Уничтожьте созданные ресурсы с помощью **terraform**. Убедитесь, что все ресурсы удалены. Приложите содержимое файла **terraform.tfstate**. 
 ```terraform
 cat terraform.tfstate
@@ -232,7 +233,7 @@ cat terraform.tfstate
 }
 
 ```
-10. Объясните, почему при этом не был удалён docker-образ **nginx:latest**. Ответ **обязательно** подкрепите строчкой из документации [**terraform провайдера docker**](https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs).  (ищите в классификаторе resource docker_image )
+9. Объясните, почему при этом не был удалён docker-образ **nginx:latest**. Ответ **обязательно** подкрепите строчкой из документации [**terraform провайдера docker**](https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs).  (ищите в классификаторе resource docker_image )
 ```terraform
 У нас добавлен аргумент "keep_locally = true", который оставляет образ при удалении терраформом:
 

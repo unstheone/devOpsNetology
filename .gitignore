@@ -36,8 +36,18 @@
 ehthumbs.db
 Thumbs.db
 
+# Local .terraform directories and files
+**/.terraform/*
+.terraform*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
 
 
 # MANUAL addition #
 ###################
 *key.json
+05-virt-04-docker-compose/src/terraform/variables.tf
+05-virt-05-docker-swarm/src/terraform/variables.tf
+personal.auto.tfvars
