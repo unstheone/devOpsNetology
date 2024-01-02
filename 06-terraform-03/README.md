@@ -282,3 +282,4 @@ netology-develop-platform-db-replica   ansible_host=51.250.68.194   fqdn=fhm4ndi
 netology-develop-platform-storage   ansible_host=51.250.69.107   fqdn=fhm3pmvjum21026qimvd.auto.internal
 
 ```
+![task4.png](img%2Ftask4.png)
