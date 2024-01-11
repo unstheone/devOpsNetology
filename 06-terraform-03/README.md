@@ -50,6 +50,7 @@ resource "yandex_compute_instance" "web" {
   }
 }
 ```
+![task2-vm-sec.png](img%2Ftask2-vm-sec.png)
 2. Создайте файл for_each-vm.tf. Опишите в нём создание двух ВМ для баз данных с именами "main" и "replica" **разных** по cpu/ram/disk , используя мета-аргумент **for_each loop**. Используйте для обеих ВМ одну общую переменную типа:
 ```
 variable "each_vm" {
@@ -209,7 +210,7 @@ resource "yandex_compute_instance" "storage" {
   dynamic "secondary_disk" {
     for_each = "${yandex_compute_disk.one-GB-disk.*.id}"
     content {
-      disk_id = yandex_compute_disk.one-GB-disk["${secondary_disk.key}"].id
+      disk_id = secondary_disk.value
     }
   }
   network_interface {
