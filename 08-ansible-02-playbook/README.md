@@ -272,6 +272,7 @@ ok: [clickhouse-01] => (item=[2, 'clickhouse-server_22.4.6.53.deb'])
 [README.md](playbook%2FREADME.md)
 #### 10. Готовый playbook выложите в свой репозиторий, поставьте тег `08-ansible-02-playbook` на фиксирующий коммит, в ответ предоставьте ссылку на него.
 Done
+cd13c42 (HEAD -> master, tag: 08-ansible-02-playbook) Домашнее задание 08-02-Работа с Playbook
 
 ---
 
