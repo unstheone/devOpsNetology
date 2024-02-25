@@ -51,3 +51,4 @@ Thumbs.db
 05-virt-04-docker-compose/src/terraform/variables.tf
 05-virt-05-docker-swarm/src/terraform/variables.tf
 personal.auto.tfvars
+*.pub
