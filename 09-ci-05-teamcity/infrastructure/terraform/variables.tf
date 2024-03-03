@@ -35,6 +35,9 @@ variable "vm_family" {
   default =  {
    ubuntu = "ubuntu-2004-lts"
    centos = "centos-7"
+   jenkins-master = "jenkins-master"
+   jenkins-agent = "jenkins-agent"
+   teamcity = "jetbrains/teamcity-server"
   }
 }
 
@@ -46,15 +49,16 @@ variable "vm_platform_id" {
 variable "vm_role" {
   type    = map(string)
   default = {
-    web = "web"
-    db  = "db"
+    master = "jenkins-master"
+    agent  = "jenkins-agent"
+    teamcity = "teamcity"
   }
 }
 
 variable "vms_resources" {
   type    = map(number)
   default = {
-    cores  = 2
+    cores  = 4
     memory = 4
     c_f    = 20
   }
